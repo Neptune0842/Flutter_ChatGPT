@@ -73,6 +73,22 @@ class _ChatPage extends State<ChatPage> {
               itemCount: _messages.length,
             ),
           ),
+          const Divider(height: 1.0, color: Colors.blue, thickness: 3),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+            ),
+            child: _buildTextComposer(
+              textController: _controller,
+              isComposing: true,
+              handleSubmitted: (x) {
+                setState(() {
+                  sendUser(x!);
+                });
+                return null;
+              },
+            ),
+          ),
         ],
       ),
     );
