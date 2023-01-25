@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:untitled1/Chat_message.dart'
 import 'dart:convert';
 import 'dart:io';
 
@@ -33,7 +33,24 @@ class _ChatPage extends State<ChatPage> {
   }
 
 
+  void sendMessage(message) async {
+    final response = await sendRequest(message);
+    if (response.statusCode == 200) {
+      final completions =
+      json.decode(await response.transform(utf8.decoder).join())['choices'];
+      for (var completion in completions) {
+        print(completion['text']);
+        _messages.insert(
+            0, ChatMessage(text: completion['text'], sender: "OpenAI"));
+      }
+      setState(() {});
+    } else {
+      print("Error Here!");
+    }
+  }
 
+  final TextEditingController _controller = TextEditingController();
+  final List<ChatMessage> _messages = [];
 
   @override
   Widget build(BuildContext context) {
