@@ -57,6 +57,8 @@ class _ChatPage extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
 
+        title: const Text("Pro🤖Bot"),
+        leading: Image.asset("assets/images/ChatGPT_Icon.png"),
       ),
       body: Column(
         children: <Widget>[
